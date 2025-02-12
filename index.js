@@ -271,3 +271,207 @@ function emojifyPhrase(phrase) {
 
 // console.log(emojifyPhrase("I :heart: my :cat:"));
 // console.log(emojifyPhrase("I :heart: my :elephant:"));
+
+/* 
+
+Anagrams are groups of words that can be spelled with the same letters. 
+For example, the letters in "pea" can be rearrange to spell "ape", and 
+the letters in "allergy" can be rearranged to spell "gallery."
+
+Write a function to check if two strings of lowercase letters are anagrams. 
+Return true if the word is an anagram. Return false if it isn't. 
+
+Example input: "allergy", "gallery"
+Example output: true
+
+Example input: "rainbow", "crossbow"
+Example output: false
+
+*/
+
+function isAnagram(str1, str2) {
+  if (str1.length !== str2.length) return false;
+
+  let count = {};
+  for (let char of str1) {
+    count[char] = (count[char] || 0) + 1;
+  }
+
+  for (let char of str2) {
+    if (!count[char]) return false;
+    count[char]--;
+  }
+
+  return true;
+
+  // return str1.split("").sort().join("") === str2.split("").sort().join("");
+}
+
+// console.log(isAnagram("allergy", "gallery"));
+// console.log(isAnagram("treasure", "measure"));
+// console.log(isAnagram("rainbow", "crossbow"));
+
+// console.log((1 || 0) + 1);
+
+/* We Come in Peace!  
+We've received what (we assume) is a message of peace and brotherhood from 
+an alien planet. They almost got it right, but the messages are 
+backward. Write functions to reverse the backward messages so we can 
+read what they have to say! 
+*/
+
+const title = ":htraE no od ot ffutS";
+const messages = [
+  "maerc eci yrT",
+  "rewoT leffiE tisiV",
+  "noom eht ot snamuh etacoleR",
+  "egrahc ni stac tuP",
+];
+
+/* Step 1: Reverse a string
+Write a function that takes in a string and returns the reverse 
+of that string. An interviewer may want to check if you know your
+string methods, or may want to know if you can reverse a string manually. 
+Practice both ways! 
+
+Example input: !htrae ot emocleW
+Example output: Welcome to earth!
+*/
+
+/**
+ * Reverses both the character in word and the word order in a string
+ * @param {string} arr
+ * @returns {string}
+ */
+function reverseString(arr) {
+  return arr.split("").reverse().join("");
+}
+
+/*
+Step 2: Now we'll reverse all strings in an array. Write a function that takes in
+an array of strings and returns a new array with all strings reversed.
+
+You can use reuse your reverseString() function, use string methods, or 
+reverse the strings manually. 
+*/
+
+/**
+ *
+ * @param {Array} arr
+ * @returns {Array}
+ */
+function reverseStringsInArray(arr) {
+  return arr.map(reverseString);
+}
+
+// console.log(reverseString(title));
+// console.log(reverseStringsInArray(messages));
+
+/*  
+Palindromes are words that are the same forward or backward. For example, 
+the words "noon" and "kayak" are a palindromes.
+ 
+Write a function to check if a lowercased string of letters is a palindrome. 
+If the word is palindrome, return true. If it isn't, return false.
+
+Example input: "motorbike"
+Example output: false
+
+Example input: "rotator" 
+Example output: true
+*/
+
+function isPalindrome(str) {
+  // First reverse string and validate using conditionals whether string is a palindrome true or false
+
+  // Solution 1: Built in reverse methond
+  // return str.split("").reverse().join("") === str ? true : false;
+
+  // Solution 2: for loop using push and join
+  // const reversedStr = [];
+  // for (let i = str.length - 1; i >= 0; i--) {
+  //   reversedStr.push(str[i]);
+  // }
+  // return reversedStr.join("") === str;
+
+  // Solution 3: for loop
+  let reversedStr = "";
+  for (let i = str.length - 1; i >= 0; i--) {
+    reversedStr += str[i];
+  }
+  return reversedStr === str;
+}
+
+// Test your function
+// console.log(isPalindrome("abba"));
+// console.log(isPalindrome("civic"));
+// console.log(isPalindrome("octopus"));
+// console.log(isPalindrome("pumpkins"));
+// console.log(isPalindrome("madam"));
+
+/*  
+Grandpa's hand isn't as steady as it used to be. You finally convinced him
+to start using a password manager, but he accidentally typed and saved his
+password with a bunch of extra characters. Help him recover his password by 
+removing all the duplicate characters. 
+
+Your function should take in a string of characters and return a
+string with the duplicate characters removed. Assume that your input
+is lowercased with only letters and numbers.  
+
+Example input: "aabbccb1212"
+Example output: "abc12"
+*/
+const password = "9338dsabbbadjdjdj2sdfdfdf282ff8fdsd888ss8cfgfg332q23";
+
+function removeDupeChars(chars) {
+  // Solution 1: Using spread and new Set
+  return [...new Set(chars)].join("");
+
+  // Solution 2: Using for of loop and includes
+  // First declare let variable with empty string
+  // Loop through the parameter and only include unique value
+  // let uniqueStr = "";
+  // for (let char of chars) {
+  //   if (!uniqueStr.includes(char)) {
+  //     uniqueStr += char;
+  //   }
+  // }
+  // return uniqueStr;
+}
+
+// console.log(removeDupeChars(password));
+
+/* 
+How often do the letters in your name repeat? 
+
+Write a function that counts how many times each letter of your name
+occurs. Your function should take in your first and last name and return
+an object where the keys are each character in your name, and the value
+is how many times that character appears in your name. 
+
+Example input: "Peggy Porth"
+Example output: {p: 2, e: 1, g: 2, y: 1, o: 1, r: 1, t: 1, h: 1}
+
+Your function should NOT count spaces and should not be case sensitive (a
+lowercase t and a capital T should be considered the same character).
+
+*/
+
+function countChars(str) {
+  // Declare a variable with empty object
+  // Convert string into a lowercase
+  // Loop through the string and convert each character into key and their value will be count occurence
+  // return object
+
+  let countedChars = {};
+  const strToLowerCase = str.toLowerCase().replace(/\s+/, "");
+  for (let chars of strToLowerCase) {
+    countedChars[chars] = (countedChars[chars] || 0) + 1;
+  }
+
+  return countedChars;
+}
+
+// console.log(countChars("Peggy Porth"));
+// console.table(countChars("Mohammed Asim"));
